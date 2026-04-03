@@ -1,4 +1,4 @@
-import { redis } from '@/lib/redis';
+import { getRedis } from '@/lib/redis';
 import { NextRequest, NextResponse } from 'next/server';
 import { StoredPlan } from '@/lib/types';
 
@@ -8,6 +8,7 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
+    const redis = getRedis();
     const data = await redis.get(`plan:${id}`);
 
     if (!data) {
