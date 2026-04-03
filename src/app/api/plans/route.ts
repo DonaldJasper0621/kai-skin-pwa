@@ -1,7 +1,11 @@
 import { getRedis } from '@/lib/redis';
-import { nanoid } from 'nanoid';
+import { randomBytes } from 'crypto';
 import { NextRequest, NextResponse } from 'next/server';
 import { SkincarePlan, StoredPlan } from '@/lib/types';
+
+function generateId(length: number = 6): string {
+  return randomBytes(length).toString('base64url').slice(0, length);
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -14,7 +18,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const id = nanoid(6);
+    const id = generateId(6);
     
     const storedPlan: StoredPlan = {
       ...plan,
@@ -35,7 +39,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('建立計劃失敗:', error);
     return NextResponse.json(
-      { error: '建立計劃失敗' },
+      { error: '建立計劃失敗', details: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     );
   }
