@@ -2,8 +2,8 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Kai Skin Advisor",
-  description: "你的專屬皮膚顧問 - 簡單、直接、有效的護膚建議",
+  title: "Kai Skin Advisor — AI 護膚顧問",
+  description: "分析皮膚問題、給你簡單步驟、推薦適合產品。透過 Telegram 免費開始諮詢。",
 };
 
 export const viewport: Viewport = {
